@@ -182,10 +182,10 @@ create_readme()
    if [ "${OPTION_WRITE_README}" = "YES" ]
    then
       if [ -d "${templates}" ] &&
-         [ "${OPTION_FORCE}" = "YES" -o ! -f "${templates}/README.md" ]
+         [ "${OPTION_FORCE}" = "YES" -o ! -f "${templates}/templates_README.md" ]
       then
-         log_info "Creating help file \"${templates}/README.md\" ..."
-         redirect_exekutor "${templates}/README.md" cat <<EOF
+         log_info "Creating help file \"${templates}/templates_README.md\" ..."
+         redirect_exekutor "${templates}/templates_README.md" cat <<EOF
 # Templates to support forks
 
 The templates in this directory structure were initially created with
@@ -194,15 +194,15 @@ The templates in this directory structure were initially created with
 Recreate the original files from the templates with
 
 \`\`\`
-mulle-objc-process-templates --publisher '${PUBLISHER}' --tap '${PUBLISHER_TAP}'
+mulle-objc-print-templates --publisher '${PUBLISHER}' --tap '${PUBLISHER_TAP}'
 \`\`\`
 
 or substitute with your own publisher information.
 
 ---
 
-\`mulle-objc-process-templates\` and \`mulle-objc-create-templates\` are part of
-[mulle-objc-developer](https://github.com/mulle-objc/mulle-objc-developer)
+\`mulle-objc-print-templates\` and \`mulle-objc-create-templates\` are part of
+[mulle-objc-templates](https://github.com/mulle-nat/mulle-objc-templates)
 EOF
       fi
    else
