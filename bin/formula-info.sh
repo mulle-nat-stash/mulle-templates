@@ -2,8 +2,8 @@
 # If you don't have this file, there will be no homebrew
 # formula operations.
 #
-PROJECT="mulle-objc-developer"      # your project/repository name
-DESC="🎁 Developer tools for mulle-objc"
+PROJECT="mulle-objc-tools"      # your project/repository name
+DESC="🔧Tools for mulle-objc development and to maintain mulle-objc forks"
 LANGUAGE="bash"             # c,cpp, objc, bash ...
 
 # LANGUAGE="c"             # c,cpp, objc, bash ...
