@@ -89,9 +89,14 @@ create_templates()
    local output
    local name
 
+   local search
+
+   search="^(?!.*(mulle-build|mulle-bootstrap)).*(${PUBLISHER_TAP}|github.com/${PUBLISHER})"
+   log_fluff "Ack pattern: '${search}'"
+
    IFS="
 "
-   for i in `ack --nofollow -l '^(?!.*(mulle-build|mulle-bootstrap)).*(mulle-kybernetik/software|github.com/mulle-nat)'`
+   for i in `ack --nofollow -l "${search}"`
    do
       log_fluff "Considering \"${i}\" ..."
 
@@ -143,19 +148,33 @@ create_wrapper()
 {
    local templates="$1"
 
+   local wrapper
+
    if [ "${OPTION_WRITE_WRAPPER}" = "YES" ]
    then
+      wrapper="${templates}/_wrapper.md.scion"
       if [ -d "${templates}" ] &&
-         [ "${OPTION_FORCE}" = "YES" -o ! -f "${templates}/_wrapper.scion" ]
+         [ "${OPTION_FORCE}" = "YES" -o ! -f "${wrapper}" ]
       then
-         log_info "Creating wrapper \"${templates}/_wrapper.scion\" ..."
-         redirect_exekutor "${templates}/_wrapper.scion" cat <<EOF
+         log_info "Creating wrapper \"${wrapper}\" ..."
+         redirect_exekutor "${wrapper}" cat <<EOF
 [comment]: <> ({{COMMENT}})
 {% includes TEMPLATE_FILE %}
 EOF
       fi
+
+      wrapper="${templates}/_wrapper.yml.scion"
+      if [ -d "${templates}" ] &&
+         [ "${OPTION_FORCE}" = "YES" -o ! -f "${wrapper}" ]
+      then
+         log_info "Creating wrapper \"${wrapper}\" ..."
+         redirect_exekutor "${wrapper}" cat <<EOF
+# {{COMMENT}}
+{% includes TEMPLATE_FILE %}
+EOF
+      fi
    else
-      log_fluff "Not writing a wrapper"
+      log_fluff "Not writing an wrappers"
    fi
 }
 
@@ -269,6 +288,7 @@ main()
          ;;
 
          -*)
+            log_error "unknown option $1"
             usage
          ;;
 
@@ -291,8 +311,8 @@ main()
       fi
    fi
 
-   PUBLISHER="${PUBLISHER:-${OPTION_PUBLISHER}}"
-   PUBLISHER_TAP="${PUBLISHER_TAP:-${OPTION_PUBLISHER_TAP}}"
+   PUBLISHER="${OPTION_PUBLISHER:-${PUBLISHER}}"
+   PUBLISHER_TAP="${OPTION_PUBLISHER_TAP:-${PUBLISHER_TAP}}"
 
    [ -z "${PUBLISHER}" ]     && fail "PUBLISHER undefined"
    [ -z "${PUBLISHER_TAP}" ] && fail "PUBLISHER_TAP undefined"
