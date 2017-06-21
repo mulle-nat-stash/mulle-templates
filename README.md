@@ -5,9 +5,8 @@
 ![GitHub release](https://img.shields.io/github/release/mulle-nat/mulle-objc-tools.svg)
 
 
-First and foremost this project supplies you with a script `mulle-objc-init`
-to setup your own **mulle-objc** projects. It also contains a variety of other
-scripts that are useful for maintaining **mulle-objc** projects.
+This is a collection of scripts that are useful for maintaining **mulle-objc**
+projects and forks.
 
 
 ## Development tools
@@ -15,7 +14,6 @@ scripts that are useful for maintaining **mulle-objc** projects.
 Script                             | Description
 -----------------------------------|------------------------------------
 mulle-objc-clone                   | Setup an environment to develop **mulle-objc** itself
-mulle-objc-init                    | Create new **mulle-objc** projects
 mulle-objc-create-dependencies-inc | Create a dependencies.inc list from your library
 
 
@@ -27,13 +25,21 @@ mulle-objc-change-publisher        | "hack" references to publisher out of a pro
 mulle-objc-change-tap              | "hack" references to the homebrew tap out of a project. Can be useful if you fork **mulle-objc**.
 mulle-objc-clone                   | Setup an environment to develop **mulle-objc** itself
 mulle-objc-create-templates        | Scans your .md and .yml files and created scion templates. Also useful for forks.
-mulle-objc-print-templates         | Reproduces those .md and .yml files from the scion templates, sustituting publisher and tap.
+mulle-objc-print-templates         | Reproduces those .md and .yml files from the scion templates by substituting with your publisher and tap information.
 
 
 ## Installation
 
-You install this project by installing [mulle-objc-developer](//github.com/mulle-nat/mulle-objc-developer).
+```
+mulle-bootstrap setting -g -r -a repositories '${MULLE_OBJC_REPOSITORIES:-https://github.com/mulle-nat}/mulle-objc-tools;;${MULLE_OBJC_TOOLS_BRANCH:-release}'
+mulle-bootstrap
+```
 
+Add tools to PATH using bash:
+
+```
+PATH="`mulle-bootstrap paths path`"
+```
 
 ## Links
 

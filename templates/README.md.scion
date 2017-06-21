@@ -4,9 +4,8 @@
 ![GitHub release](https://img.shields.io/github/release/{{PUBLISHER}}/mulle-objc-tools.svg)
 
 
-First and foremost this project supplies you with the script `mulle-objc-init`
-to setup your own **mulle-objc** projects. It also contains some other
-scripts that are useful for maintaining **mulle-objc** projects and forks.
+This is a collection of scripts that are useful for maintaining **mulle-objc**
+projects and forks.
 
 
 ## Development tools
@@ -14,7 +13,6 @@ scripts that are useful for maintaining **mulle-objc** projects and forks.
 Script                             | Description
 -----------------------------------|------------------------------------
 mulle-objc-clone                   | Setup an environment to develop **mulle-objc** itself
-mulle-objc-init                    | Create new **mulle-objc** projects
 mulle-objc-create-dependencies-inc | Create a dependencies.inc list from your library
 
 
@@ -31,8 +29,16 @@ mulle-objc-print-templates         | Reproduces those .md and .yml files from th
 
 ## Installation
 
-You install this project by installing [mulle-objc-developer](//github.com/{{PUBLISHER}}/mulle-objc-developer).
+```
+mulle-bootstrap setting -g -r -a repositories '${MULLE_OBJC_REPOSITORIES:-https://github.com/{{PUBLISHER}}}/mulle-objc-tools;;${MULLE_OBJC_TOOLS_BRANCH:-release}'
+mulle-bootstrap
+```
 
+Add tools to PATH using bash:
+
+```
+PATH="`mulle-bootstrap paths path`"
+```
 
 ## Links
 

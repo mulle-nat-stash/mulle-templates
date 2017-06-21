@@ -44,11 +44,12 @@ e.g. templates/dox/foo.html.scion produces dox/foo.html
 You can use the shells script ./bin/tap-info.sh to define the publisher
 values, or use the following options.
 
-Options: (All options are required)
+Options:
+   -f                 : force generation of templates
+   --<name> <value>   : pass arbitrary key/values to print
    --publisher <name> : PUBLISHER to print (e.g. mulle-nat)
    --tap <name>       : PUBLISHER_TAP to print (e.g. mulle-kybernetik/software)
    --fullname <name>  : PUBLISHER_FULLNAME to print (e.g. Mulle KybernetiK)
-   --<name> <value>   : pass arbitrary key/values to print
 EOF
    exit 1
 }
@@ -108,6 +109,21 @@ lso()
 }
 
 
+is_generation_needed()
+{
+   local template="$1"
+   local wrapper="$2"
+   local output="$3"
+
+   [ "${OPTION_FORCE}" = "YES" ]     && return 0
+   [ ! -e "${output}" ]              && return 0
+   [ "${template}" -nt "${output}" ] && return 0
+   [ ! -z "${wrapper}" ] && [ "${wrapper}" -nt "${output}" ] && return 0
+
+   return 1
+}
+
+
 generate()
 {
    local template="$1"
@@ -124,7 +140,12 @@ generate()
    templatename="${template}"
    ext="${output##*.}"
    wrapper="`read_extension_wrapper "${rootdirectory}" "${ext}"`"
-   md
+
+   if ! is_generation_needed "${templatename}" "${wrapper}" "${output}"
+   then
+      log_verbose "\"${output}\" appears up to date"
+      return
+   fi
 
    if [ ! -z "${wrapper}"  ]
    then
@@ -136,9 +157,12 @@ TEMPLATE_FILE='${template}'"
       log_info "Printing \"${output}\" from \"${template}\"..." >&2
    fi
 
+   if [ -e "${output}" ]
+   then
+      exekutor chmod a+w "${output}"
+   fi
 
-   cmdline="${cmdline} "
-   eval_exekutor  "${environment}" \
+   eval_exekutor "MULLESCION_NO_HASHBANG=YES" "${environment}" \
          mulle-scion "'${template}'" args "'${output}'" \
             "PUBLISHER='${PUBLISHER}'" \
             "PUBLISHER_TAP='${PUBLISHER_TAP}'" \
@@ -148,8 +172,8 @@ TEMPLATE_FILE='${template}'"
 
    # restore permissions for file from template
    # then write protect it as a further hint
-   eval_exekutor chmod "${mode}" "'${output}'"
-   eval_exekutor chmod a-w "'${output}'"
+   exekutor chmod "${mode}" "${output}"
+   exekutor chmod a-w "${output}"
 }
 
 
@@ -203,12 +227,17 @@ main()
    local OPTION_PUBLISHER
    local OPTION_PUBLISHER_FULLNAME
    local OPTION_PUBLISHER_TAP
+   local OPTION_FORCE="NO"
 
    local varname
 
    while [ $# -ne 0 ]
    do
       case "$1" in
+         -f|--force)
+            OPTION_FORCE="YES"
+         ;;
+
          -i|-ignore-tap-info)
             OPTION_READ_TAP_INFO="NO"
          ;;
