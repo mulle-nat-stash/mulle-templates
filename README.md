@@ -6,18 +6,8 @@
 
 
 This is a collection of scripts that are useful for maintaining **mulle-objc**
-projects and forks.
+forks.
 
-
-## Development tools
-
-Script                             | Description
------------------------------------|------------------------------------
-mulle-objc-clone                   | Setup an environment to develop **mulle-objc** itself
-mulle-objc-create-dependencies-inc | Create a dependencies.inc list from your library
-
-
-## Fork support tools
 
 Script                             | Description
 -----------------------------------|------------------------------------

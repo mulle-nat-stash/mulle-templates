@@ -113,11 +113,7 @@ create_templates()
 
       # only do documentation style files for now
       case "${name}" in
-         CMake*.txt)
-            log_fluff "Ignored \"${name}\" because it's a CMake file"
-            continue
-         ;;
-         *.md|*.yml) # and .travis.yml too intentional
+         *.txt|*.md|*.yml) # and .travis.yml too intentional
          ;;
 
          *)
