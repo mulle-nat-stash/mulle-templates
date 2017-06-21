@@ -91,7 +91,7 @@ create_templates()
 
    IFS="
 "
-   for i in `ack -l '^(?!.*(mulle-build|mulle-bootstrap)).*(mulle-kybernetik/software|github.com/mulle-nat)'`
+   for i in `ack --nofollow -l '^(?!.*(mulle-build|mulle-bootstrap)).*(mulle-kybernetik/software|github.com/mulle-nat)'`
    do
       log_fluff "Considering \"${i}\" ..."
 

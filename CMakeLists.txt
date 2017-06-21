@@ -17,7 +17,7 @@ mulle-objc-change-tap
 mulle-objc-clone
 mulle-objc-create-templates
 mulle-objc-init
-mulle-objc-make-dependencies-inc
+mulle-objc-create-dependencies-inc
 mulle-objc-print-templates
 )
 

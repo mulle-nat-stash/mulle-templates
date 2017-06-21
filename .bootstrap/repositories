@@ -1,0 +1,1 @@
+${MULLE_OBJC_REPOSITORIES:-https://github.com/mulle-nat}/mulle-objc-list;;${MULLE_OBJC_LIST_BRANCH:-release}

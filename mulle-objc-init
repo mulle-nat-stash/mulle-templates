@@ -419,7 +419,7 @@ message( STATUS "OBJC_DEPENDENCY_NAMES is \${OBJC_DEPENDENCY_NAMES}")
 # runs in build dir
 add_custom_command( TARGET "${PROJECT_NAME}Standalone"
    POST_BUILD
-   COMMAND \${DEPENDENCIES_DIR}/bin/mulle-objc-make-dependencies-inc -v
+   COMMAND \${DEPENDENCIES_DIR}/bin/mulle-objc-create-dependencies-inc -v
            -o \${CMAKE_SOURCE_DIR}/src/dependencies.inc ${PROJECT_NAME}
            \${OBJC_DEPENDENCY_NAMES}
 )
