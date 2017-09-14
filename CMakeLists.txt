@@ -12,10 +12,11 @@ set( PROJECT_VERSION "${MULLE_OBJC_TEMPLATES_VERSION}")
 set( PUBLISHER "mulle-nat")
 
 set( SCRIPTS
-mulle-objc-change-publisher
-mulle-objc-change-tap
-mulle-objc-create-templates
-mulle-objc-print-templates
+mulle-get-publisher
+mulle-change-publisher
+mulle-change-tap
+mulle-templates-create
+mulle-templates-print
 )
 
 

@@ -1,27 +1,24 @@
-# mulle-objc-templates
+# mulle-templates
 
-![GitHub tag](https://img.shields.io/github/tag/{{PUBLISHER}}/mulle-objc-tools.svg)
-![GitHub release](https://img.shields.io/github/release/{{PUBLISHER}}/mulle-objc-tools.svg)
+![GitHub tag](https://img.shields.io/github/tag/{{PUBLISHER}}/mulle-templates.svg)
+![GitHub release](https://img.shields.io/github/release/{{PUBLISHER}}/mulle-templates.svg)
 
 
-This is a collection of scripts that are useful for maintaining **mulle-objc**
-forks.
+This is a collection of scripts that are useful for maintaining GitHub forks and
+especially their documentation.
 
 
 Script                             | Description
 -----------------------------------|------------------------------------
-mulle-objc-change-publisher        | "hack" references to publisher out of a project. Can be useful if you fork **mulle-objc**.
-mulle-objc-change-tap              | "hack" references to the homebrew tap out of a project. Can be useful if you fork **mulle-objc**.
-mulle-objc-create-templates        | Scans your .md and .yml files and created scion templates. Also useful for forks.
-mulle-objc-print-templates         | Reproduces those .md and .yml files from the scion templates by substituting with your publisher and tap information.
+mulle-get-publisher                | Looks for publishe info in known places
+mulle-change-publisher             | "hack" references to publisher out of a project. Can be useful if you fork **mulle-objc**.
+mulle-change-tap                   | "hack" references to the homebrew tap out of a project. Can be useful if you fork **mulle-objc**.
+mulle-templates-create             | Scans your .md and .yml files and created scion templates. Also useful for forks.
+mulle-templates-print              | Reproduces those .md and .yml files from the scion templates by substituting with your publisher and tap information.
 
 
 ## Installation
 
 ```
-brew install `{{PUBLISHER_TAP}}/mulle-objc-templates`
+brew install `{{PUBLISHER_TAP}}/mulle-templates`
 ```
-
-## Links
-
-Visit the [mulle-objc community](https://mulle-objc.github.io) for more information.

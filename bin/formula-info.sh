@@ -2,8 +2,8 @@
 # If you don't have this file, there will be no homebrew
 # formula operations.
 #
-PROJECT="mulle-objc-templates"      # your project/repository name
-DESC="🔧Tools for maintaining mulle-objc forks"
+PROJECT="mulle-templates"      # your project/repository name
+DESC="🔧Tools for maintaining documentations of multiple forks"
 LANGUAGE="bash"             # c,cpp, objc, bash ...
 
 # LANGUAGE="c"             # c,cpp, objc, bash ...
@@ -17,9 +17,8 @@ LANGUAGE="bash"             # c,cpp, objc, bash ...
 # DEPENDENCIES and BUILD_DEPENDENCIES will be evaled later!
 # So keep them single quoted.
 #
-# DEPENDENCIES='${DEPENDENCY_TAP}mulle-concurrent
-# libpng
-# '
+DEPENDENCIES='${DEPENDENCY_TAP}mulle-scion
+'
 
 #
 # Build via mulle-build. If you don't like this

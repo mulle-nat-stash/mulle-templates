@@ -124,36 +124,10 @@ is_generation_needed()
    return 1
 }
 
-variable_value()
-{
-   eval "echo \${${1}}"
-}
 
 publisher_variables()
 {
-   local name
-   local names
-   local value
-   local variable
-   local variables
-
-   names="`compgen -A variable | egrep '^PUBLISHER'`"
-   for name in ${names}
-   do
-      value="`variable_value "${name}"`"
-      variable="${name}='${value}'"
-
-      log_fluff "${variable}'"
-
-      if [ -z "${variables}" ]
-      then
-         variables="${variable}"
-      else
-         variables="${variables} ${variable}"
-      fi
-   done
-
-   echo "${variables}"
+   PATH="`pwd`:$PATH" mulle-get-publisher -d ' '
 }
 
 
@@ -198,6 +172,12 @@ TEMPLATE_FILE='${template}'"
    local variables
 
    variables="`publisher_variables`"
+
+   VERSION="`mulle-homebrew-version 2> /dev/null`"
+   if [ ! -z "${VERSION}" ]
+   then
+      variables="VERSION=${VERSION} ${variables}"
+   fi
 
    eval_exekutor "MULLESCION_NO_HASHBANG=YES" "${environment}" \
          mulle-scion "'${template}'" args "'${output}'" \

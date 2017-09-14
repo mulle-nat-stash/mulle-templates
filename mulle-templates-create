@@ -45,7 +45,7 @@ e.g. dox/foo.html turns into templates/dox/foo.html.scion
 You can use the shells script ./bin/tap-info.sh to define the publisher
 values, or use the following options.
 
-Options: (All options are required)
+Options:
    --publisher <name> : PUBLISHER to print (e.g. mulle-nat)
    --tap <name>       : PUBLISHER_TAP to print (e.g. mulle-kybernetik/software)
 EOF
@@ -149,9 +149,10 @@ create_wrapper()
    if [ "${OPTION_WRITE_WRAPPER}" = "YES" ]
    then
       wrapper="${templates}/_wrapper.md.scion"
-      if [ -d "${templates}" ] &&
-         [ "${OPTION_FORCE}" = "YES" -o ! -f "${wrapper}" ]
+      if [ "${OPTION_FORCE}" = "YES" ] || [ -d "${templates}" -a ! -f "${wrapper}" ]
       then
+         mkdir_if_missing "${templates}" || exit 1
+
          log_info "Creating wrapper \"${wrapper}\" ..."
          redirect_exekutor "${wrapper}" cat <<EOF
 [comment]: <> ({{COMMENT}})
@@ -160,9 +161,10 @@ EOF
       fi
 
       wrapper="${templates}/_wrapper.yml.scion"
-      if [ -d "${templates}" ] &&
-         [ "${OPTION_FORCE}" = "YES" -o ! -f "${wrapper}" ]
+      if [ "${OPTION_FORCE}" = "YES" ] || [ -d "${templates}" -a ! -f "${wrapper}" ]
       then
+         mkdir_if_missing "${templates}" || exit 1
+
          log_info "Creating wrapper \"${wrapper}\" ..."
          redirect_exekutor "${wrapper}" cat <<EOF
 # {{COMMENT}}
@@ -170,7 +172,7 @@ EOF
 EOF
       fi
    else
-      log_fluff "Not writing an wrappers"
+      log_fluff "Not writing any wrappers"
    fi
 }
 
@@ -181,11 +183,15 @@ create_readme()
 
    if [ "${OPTION_WRITE_README}" = "YES" ]
    then
-      if [ -d "${templates}" ] &&
-         [ "${OPTION_FORCE}" = "YES" -o ! -f "${templates}/templates_README.md" ]
+      local readme
+
+      readme="${templates}/templates_README.md"
+      if [ "${OPTION_FORCE}" = "YES" ] || [ -d "${templates}" -a ! -f "${readme}" ]
       then
-         log_info "Creating help file \"${templates}/templates_README.md\" ..."
-         redirect_exekutor "${templates}/templates_README.md" cat <<EOF
+         mkdir_if_missing "${templates}" || exit 1
+
+         log_info "Creating help file \"${readme}\" ..."
+         redirect_exekutor "${readme}" cat <<EOF
 # Templates to support forks
 
 The templates in this directory structure were initially created with

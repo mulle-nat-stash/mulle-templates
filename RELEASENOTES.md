@@ -1,3 +1,9 @@
+## 0.10.0
+
+* rename scripts, since they are not only usefule for ObjC
+* fix various stuff
+
+
 ## 0.9.1
 
 * split off from mulle-objc-developer into new repository mulle-objc-tools
